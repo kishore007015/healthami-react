@@ -1,0 +1,68 @@
+.App {
+  text-align: center;
+}
+
+.closeBtn{
+  float: right;
+  position: relative;
+  top: -28px;
+  left: 25px;
+  z-index: -1;
+  border: 0px !important;
+  background: #fff !important;
+  color: orangered;
+}
+.container{
+  width: 100vw;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap :7rem;
+  padding: 0 2rem;
+}
+
+.login-content h2{
+  margin: 15px 0;
+  color: #333;
+  text-transform: uppercase;
+  font-size: 2.9rem;
+}
+
+
+.modalOpen{
+  float: right;
+  right: 20px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container.login {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,44 @@
+.tags-input-container{
+    border: 1px solid #ccc;
+    padding: 0.3em;
+    border-radius: 3px;
+    margin: 0.3em 0em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5em;
+  }
+  .tag-item .text{
+    padding-top: 2px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .tag-item{
+    background-color: rgb(218, 216, 216);
+    display: inline-block;
+    padding: .5em .75em;
+    border-radius: 20px;
+  }
+  .tag-item .close{
+    cursor: pointer;
+  }
+  
+  .tags-input{
+    flex-grow: 1;
+    padding: .5em 0;
+    border: none;
+    outline: none;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .MuiModal-root .MuiBox-root {
+      width: 85% !important;
+    }
+    
+  }
+  @media screen and (max-width: 780px) {
+    .MuiButton-root {
+        width: 90%;
+        bottom:5px;
+    }
+  }
