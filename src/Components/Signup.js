@@ -4,6 +4,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import '../Styles/Login.css';
 import { serviceCall } from "../Utils/ServiceUtils";
+import Spinner from 'react-bootstrap/Spinner'
 
 const Signup = () => {
 
@@ -28,6 +29,7 @@ const Signup = () => {
   });
   const [captchaCode, setCaptchaCode] = useState("");
   const [error, setError] = useState("");
+  const [showSpin, setShowSpin] = useState(false);
 
   useEffect(() => {
     refreshCaptcha();
@@ -35,6 +37,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setShowSpin(true);
     const { captchaValue } = e.target;
     if (captchaValue.value === captchaCode.trim().replace(/ /g,'')) {
       setFormBody((prev) => ({...prev, "captchaErr":false}));
@@ -61,6 +64,7 @@ const Signup = () => {
       refreshCaptcha();
       setError("");
     }
+    setShowSpin(false);
   };
 
   const handleInputChange = (e) => {
@@ -130,6 +134,7 @@ const Signup = () => {
       <div className="loginBackground">
         <div className="container signup">
           <div className="login-content">
+          {showSpin && <Spinner style={{    "left": "221px","position": "relative"}} animation="border" variant="primary" />}
             <Form onSubmit={handleSubmit}>
               
               <h3 className="mb-3 p-4">Registration</h3>
