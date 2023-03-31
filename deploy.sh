@@ -1,3 +1,10 @@
+#!/bin/bash
+#TO DEPLOY APPLICATION IN NGINX
+
+#LINUX OS PACKAGES UPGRADATION
+sudo apt-get update && apt-get upgrade && apt-get install curl gnupg2 gcc g++ make libssl-dev -y
+
+#ADDING THE NODE SOURCE REPO
 sudo curl -sL https://deb.nodesource.com/setup_current.x -o nodesource_setup.sh && bash nodesource_setup.sh
 
 #NODE INSTALLATION
