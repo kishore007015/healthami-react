@@ -7,7 +7,7 @@ sudo apt-get remove docker docker-engine docker.io
 sudo apt-get update
 
 #DOCKER INSTALLATION
-sudo apt install docker.io
+sudo apt install docker.io -y
 
 #You’ll then get a prompt asking you to choose between y/n - choose y
 
