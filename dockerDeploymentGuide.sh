@@ -1,13 +1,26 @@
-#DEPLOYING APPLICATION USING DOCKER WITH NGINX
+#TO DEPLOY APPLICATION USING DOCKER WITH NGINX
 
+#REMOVE ANY DOCKER FILES THAT ARE RUNNING IN THE SYSTEM
+sudo apt-get remove docker docker-engine docker.io
+
+#LINUX OS PACKAGES UPGRADATION
+sudo apt-get update
+
+#DOCKER INSTALLATION
+sudo apt install docker.io
+
+#You’ll then get a prompt asking you to choose between y/n - choose y
+
+#Install All The Dependency Packages Using The Following Command
+sudo snap install docker
 
 #CLONE THE REPO FROM GIT
-git clone "repo-url"
+git clone https://github.com/kishore007015/healthami-react.git
 
 #MAKE SURE THAT nginx.conf and dockerfile EXIST
 
 #NAVIGATE TO THE APPLICATION DIRECTORY WHERE DOCKERFILE EXIST
-cd /../../
+cd /root/healthami-react
 
 #BUILD THE DOCKERFILE TO CREATE A IMAGE
 docker build -t IMAGE-NAME:tag .
