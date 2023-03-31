@@ -4,6 +4,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import '../Styles/Login.css';
 import { serviceCall } from "../Utils/ServiceUtils";
+import Spinner from 'react-bootstrap/Spinner'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,8 +12,10 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [forgotPass, setForgotPass] = useState(false);
+  const [showSpin, setShowSpin] = useState(false);
 
   const handleSubmit = async (e) => {
+    setShowSpin(true);
     e.preventDefault();
     setError("");
     let reqBody = {
@@ -23,13 +26,16 @@ const Login = () => {
     if(resp.IsError === true) {
       setError(resp.Message);
     }
+    setShowSpin(false);
   };
 
   const forgotPassword = async (e) => {
     e.preventDefault();
+    setShowSpin(true);
     setError("");
     const resp = await serviceCall("GET", "/API/Account/ForgotPassowrd?Email=" + email);
     setError(resp);
+    setShowSpin(false);
   };
 
   return (
@@ -37,6 +43,7 @@ const Login = () => {
     <div className="loginBackground">
         <div className="container login">
           <div className="login-content">
+          {showSpin && <Spinner style={{    "left": "221px","position": "relative"}} animation="border" variant="primary" />}
            {!forgotPass && <Form onSubmit={handleSubmit}>
               
               <h4 className="title p-4">Welcome</h4>
