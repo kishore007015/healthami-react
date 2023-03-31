@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import '../Styles/Login.css';
-import { getServiceCall, postServiceCall } from "../Utils/ServiceUtils";
+import { serviceCall } from "../Utils/ServiceUtils";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const Login = () => {
       "UserName": userName,
       "Password": password
     }
-    const resp = await postServiceCall("/API/Account/Login", reqBody);
+    const resp = await serviceCall("POST", "/API/Account/Login", reqBody);
     if(resp.IsError === true) {
       setError(resp.Message);
     }
@@ -28,10 +28,8 @@ const Login = () => {
   const forgotPassword = async (e) => {
     e.preventDefault();
     setError("");
-    const resp = await getServiceCall("/API/Account/ForgotPassowrd?Email=" + email);
-    if(resp.Message === "User does not exist") {
-      setError(resp.Message);
-    }
+    const resp = await serviceCall("GET", "/API/Account/ForgotPassowrd?Email=" + email);
+    setError(resp);
   };
 
   return (
@@ -90,7 +88,7 @@ const Login = () => {
                   Send an Email
                 </Button>
               </div>
-              {error && <Alert variant="danger" className="errorMgT">{error}</Alert>}
+              { error && <Alert variant={`${error.Message.includes("successfully") ? "success" : "danger"}`} className="mT10">{ error.Message}</Alert>}
               <div className="p-4 mt-2 text-center signup" onClick={() =>(setForgotPass(false),setError(""))}>
                 Back to Sign in? <Link to="/"> Sign in</Link>
               </div>
