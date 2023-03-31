@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import '../Styles/Login.css';
-import { postServiceCall } from "../Utils/ServiceUtils";
+import { serviceCall } from "../Utils/ServiceUtils";
 
 const Signup = () => {
 
@@ -36,7 +36,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { captchaValue } = e.target;
-    if (captchaValue.value === captchaCode.trim()) {
+    if (captchaValue.value === captchaCode.trim().replace(/ /g,'')) {
       setFormBody((prev) => ({...prev, "captchaErr":false}));
       let reqBody = {
         "UserName": formBody.username,
@@ -48,15 +48,17 @@ const Signup = () => {
         "Email": formBody.email,
         "RoleId": formBody.role
       }
-      const resp = await postServiceCall("/API/Account/RegisterUser", reqBody)
-      if(resp.IsError === false) {
+      const resp = await serviceCall("POST", "/API/Account/RegisterUser", reqBody);
+      refreshCaptcha();
+      if(resp && resp.IsError === false && resp.Message.includes("successfully")) {
         document.getElementById("resetResiterForm").click();
         setError("success");
-      } else if(resp.IsError === true) {
-        setError(resp.Message);
+      } else {
+        resp ? setError(resp.Message) : setError("Something went wrong!");
       }
     } else {
       setFormBody((prev) => ({...prev, "captchaErr":true}));
+      refreshCaptcha();
       setError("");
     }
   };
@@ -135,6 +137,7 @@ const Signup = () => {
               <Form.Group className="mb-3 me-3" >
                 <Form.Control
                   type="text"
+                  autoComplete="off"
                   placeholder="First Name"
                   className="input"
                   id="firstName"
@@ -146,6 +149,7 @@ const Signup = () => {
               <Form.Group className="mb-3">
                 <Form.Control
                   type="text"
+                  autoComplete="off"
                   placeholder="Last Name"
                   className="input"
                   id="lastName"
@@ -159,6 +163,7 @@ const Signup = () => {
               <Form.Group className="mb-3 me-3" >
                 <Form.Control
                   type="text"
+                  autoComplete="off"
                   placeholder="Username"
                   className="input"
                   id="username"
@@ -170,6 +175,7 @@ const Signup = () => {
               <Form.Group className="mb-3" >
                 <Form.Control
                   type="text"
+                  autoComplete="off"
                   placeholder="Role"
                   className="input"
                   id="role"
@@ -183,6 +189,7 @@ const Signup = () => {
               <Form.Group className="mb-3 me-3" >
                 <Form.Control
                   type="text"
+                  autoComplete="off"
                   placeholder="Phone"
                   className="input"
                   id="phone"
@@ -194,6 +201,7 @@ const Signup = () => {
               <Form.Group className="mb-3">
                 <Form.Control
                   type="email"
+                  autoComplete="off"
                   placeholder="Email Address"
                   className="input"
                   id="email"
@@ -237,6 +245,7 @@ const Signup = () => {
                 </div>
                 <Form.Control
                   type="text"
+                  autoComplete="off"
                   placeholder="Enter Captcha"
                   className="input"
                   id="captchaValue"
