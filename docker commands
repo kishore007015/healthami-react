@@ -1,0 +1,31 @@
+#DEPLOYING APPLICATION USING DOCKER WITH NGINX
+
+
+#CLONE THE REPO FROM GIT
+git clone "repo-url"
+
+#MAKE SURE THAT nginx.conf and dockerfile EXIST
+
+#NAVIGATE TO THE APPLICATION DIRECTORY WHERE DOCKERFILE EXIST
+cd /../../
+
+#BUILD THE DOCKERFILE TO CREATE A IMAGE
+docker build -t IMAGE-NAME:tag .
+
+#RUN THE IMAGE TO CREATE CONTAINER
+docker run -d -p 80:80 imagename/imge-id
+
+#TO KNOW DETAILS OF A CONTAINER
+docker inspect container-id/name
+
+#TO LIST RUNNING IMAGES
+docker images
+
+#TO LIST ALL IMAGES
+docker images -a
+
+#TO LIST RUNNING CONTAINERS
+docker ps
+
+#TO LIST ALL CONTAINERS
+docker ps -a
