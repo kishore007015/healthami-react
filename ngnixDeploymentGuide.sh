@@ -47,5 +47,5 @@ touch /etc/nginx/conf.d/react.conf
 cp -r /root/healthami-react/nginx.conf  /etc/nginx/conf.d/react.conf
 
 #RESTART THE NGINX SERVER
-systemctl reatart nginx
+systemctl restart nginx
 	
