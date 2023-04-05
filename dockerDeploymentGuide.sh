@@ -23,10 +23,10 @@ git clone https://github.com/kishore007015/healthami-react.git
 cd /root/healthami-react
 
 #BUILD THE DOCKERFILE TO CREATE A IMAGE
-docker build -t dockerfile .
+docker build -t docname .
 
 #RUN THE IMAGE TO CREATE CONTAINER
-docker run -d -p 80:80 docName
+docker run -d -p 80:80 docname
 
 #TO KNOW DETAILS OF A CONTAINER
 docker inspect docName
